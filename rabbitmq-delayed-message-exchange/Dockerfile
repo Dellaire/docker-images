@@ -1,0 +1,12 @@
+FROM rabbitmq:latest
+
+WORKDIR $RABBITMQ_HOME/plugins
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y unzip
+RUN curl https://dl.bintray.com/rabbitmq/community-plugins/3.7.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171201-3.7.x.zip > tmp.zip
+RUN unzip tmp.zip
+RUN rm tmp.zip
+RUN rabbitmq-plugins enable rabbitmq_management
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
